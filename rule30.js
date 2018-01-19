@@ -1,20 +1,14 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Wolfram Cellular Automata
-
 // A class to manage the CA
 
 class CA {
 
-  int generation;  // How many generations?
-  int[] ruleset;   // An array to store the ruleset, for example {0,1,1,0,1,1,0,1}
+  int generation;  /* Variable that stores the # of generations */
+  int[] ruleset;   /* An array to save the ruleset defined below for creating new generations */
   int w = 5;
   int[][] matrix;  // Store a history of generations in 2D array, not just one
 
-  int cols;
-  int rows;
+  int cols; /* # of columns */
+  int rows; /* # of rows */
 
 
   CA(int[] r) {
@@ -74,14 +68,6 @@ class CA {
     }
   }
 
-  // Implementing the Wolfram rules
-  // This is the concise conversion to binary way
-  /*int rules (int a, int b, int c) {
-   String s = "" + a + b + c;
-   int index = Integer.parseInt(s, 2);
-   return ruleset[index];
-   }*/
-  // For JavaScript Mode
   int rules (int a, int b, int c) {
     if (a == 1 && b == 1 && c == 1) return ruleset[7];
     if (a == 1 && b == 1 && c == 0) return ruleset[6];
@@ -107,29 +93,19 @@ class CA {
 
 //-----------------------------------------------------------------------------------
 
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Wolfram Cellular Automata
-
-// Simple demonstration of a Wolfram 1-dimensional cellular automata
-// with the system scrolling by
-// Also implements wrap around
-
 CA ca;   // An object to describe a Wolfram elementary Cellular Automata
 
 
 void setup() {
-  size(800, 100);
-  frameRate(30);
+  size(800, 100); /* Generates the canvas and its size */
+  frameRate(30); /* Sets the frame rate */
   background(255);
-  int[] ruleset = {0,1,1,1,1,0,0,0};
+  int[] ruleset = {0,1,1,1,1,0,0,0}; /* Defines the ruleset by which new generations are created (8 possibilities) */
   
   ca = new CA(ruleset);                 // Initialize CA
 }
 
 void draw() {
-  ca.display();          // Draw the CA
-  ca.generate();
+  ca.display(); /* Displays all available generations */
+  ca.generate(); /* Generates a new generation */
 }
