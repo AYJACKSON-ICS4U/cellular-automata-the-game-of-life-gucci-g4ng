@@ -4,7 +4,7 @@ class CA {
 
   int generation;  /* Variable that stores the # of generations */
   int[] ruleset;   /* An array to save the ruleset defined below for creating new generations */
-  int w = 5;
+  int w = 5; /* Variable affecting the # of colums and rows */
   int[][] matrix;  // Store a history of generations in 2D array, not just one
 
   int cols; /* # of columns */
@@ -12,11 +12,11 @@ class CA {
 
 
   CA(int[] r) {
-    ruleset = r;
-    cols = width/w;
-    rows = height/w;
-    matrix = new int[cols][rows];
-    restart();
+    ruleset = r; /* sets ruleset equal to r */
+    cols = width/w; /* #of columns */
+    rows = height/w; /* #of rows */
+    matrix = new int[cols][rows]; /* saves the # of cols and rows in a 2-D array */
+    restart(); /* calls restarst function */
   }
 
   // Make a random ruleset
@@ -26,7 +26,7 @@ class CA {
     }
   }
 
-  // Reset to generation 0
+  // Reset to generation 0 using for loops to count rows and columns
   void restart() {
     for (int i = 0; i < cols; i++) {
       for (int j = 0; j < rows; j++) {
@@ -34,7 +34,7 @@ class CA {
       }
     }
     matrix[cols/2][0] = 1;    // We arbitrarily start with just the middle cell having a state of "1"
-    generation = 0;
+    generation = 0; 
   }
 
 
@@ -49,10 +49,10 @@ class CA {
       int right = matrix[(i+1)%cols][generation%rows];  // Right neighbor state
       matrix[i][(generation+1)%rows] = rules(left, me, right); // Compute next generation state based on ruleset
     }
-    generation++;
+    generation++; // proceeds to the next generation
   }
 
-  // This is the easy part, just draw the cells, fill 255 for '1', fill 0 for '0'
+  // Drawing the cell, where 0 representing one colour and 1 representing another colour
   void display() {
     int offset = generation%rows;
 
@@ -67,7 +67,7 @@ class CA {
       }
     }
   }
-
+  //Examines neighbourhood cells to return the ruleset for each of the 8 possible configurations (1 = on 0 =off)
   int rules (int a, int b, int c) {
     if (a == 1 && b == 1 && c == 1) return ruleset[7];
     if (a == 1 && b == 1 && c == 0) return ruleset[6];
@@ -99,10 +99,10 @@ CA ca;   // An object to describe a Wolfram elementary Cellular Automata
 void setup() {
   size(800, 100); /* Generates the canvas and its size */
   frameRate(30); /* Sets the frame rate */
-  background(255);
+  background(255); /* Sets background colour */
   int[] ruleset = {0,1,1,1,1,0,0,0}; /* Defines the ruleset by which new generations are created (8 possibilities) */
   
-  ca = new CA(ruleset);                 // Initialize CA
+  ca = new CA(ruleset);// Initialize CA
 }
 
 void draw() {
