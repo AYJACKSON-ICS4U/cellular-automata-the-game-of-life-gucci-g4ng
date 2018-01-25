@@ -1,3 +1,5 @@
+//This is for the Rule 30 Example.
+
 // A class to manage the CA
 
 class CA {
